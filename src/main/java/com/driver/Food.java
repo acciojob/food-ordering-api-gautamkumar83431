@@ -1,44 +1,23 @@
 package com.driver;
 
+package com.example.foodorderapi.model;
+
 public class Food {
-	 private int id;
-	    private String name;
-	    private double price;
+    private int id;
+    private String name;
+    private double price;
 
-	    public Food() {
-	        // Default constructor
-	    	// your code goes here
-	    }
+    public Food(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 
-	    public Food(int id, String name, double price) {
-	    	// your code goes here
-	    }
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public double getPrice() { return price; }
 
-	    // Getters and Setters
-	    public int getId() {
-	    	// your code goes here
-	        return id;
-	    }
-
-	    public void setId(int id) {
-	    	// your code goes here
-	    }
-
-	    public String getName() {
-	    	// your code goes here
-	        return name;
-	    }
-
-	    public void setName(String name) {
-	    	// your code goes here
-	    }
-
-	    public double getPrice() {
-	    	// your code goes here
-	        return price;
-	    }
-
-	    public void setPrice(double price) {
-	    	// your code goes here
-	    }
+    public void setId(int id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setPrice(double price) { this.price = price; }
 }
