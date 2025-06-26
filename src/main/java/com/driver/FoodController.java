@@ -1,43 +1,40 @@
 package com.driver;
 
-import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.foodorderapi.model.Food;
+import com.example.foodorderapi.model.Menu;
+import com.example.foodorderapi.model.Order;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/food")
 public class FoodController {
-    private Menu menu;
-    private Order currentOrder;
-
-    public FoodController() {
-    	// your code goes here
-    }
 
     @GetMapping("/menu")
     public List<Food> getMenu() {
-    	// your code goes here
-        return menu.getMenuItems();
+        return Menu.getMenu();
     }
 
-    @PostMapping("/order/{itemId}")
-    public void placeOrder(@PathVariable int itemId) {
-    	// your code goes here
+    @PostMapping("/order/{itemID}")
+    public String placeOrder(@PathVariable int itemID) {
+        Food item = Menu.getItemById(itemID);
+        if (item != null) {
+            Order.addItem(item);
+            return item.getName() + " added to your order.";
+        } else {
+            return "Item not found.";
+        }
     }
 
     @GetMapping("/order")
-    public Order getCurrentOrder() {
-    	// your code goes here
-        return currentOrder;
+    public List<Food> getOrder() {
+        return Order.getOrderItems();
     }
 
     @GetMapping("/order/total")
-    public double getTotalBill() {
-    	// your code goes here
-        return currentOrder.getTotalBill();
+    public String getTotalBill() {
+        return "Total Bill: ₹" + Order.getTotal();
     }
 }
